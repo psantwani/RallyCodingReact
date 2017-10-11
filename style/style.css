@@ -1,0 +1,11 @@
+.right{
+    float: right;
+}
+
+.post-item{
+    min-height: 70px;
+}
+
+.create-post-form{
+    margin: 20px 0px 20px 0px;
+}
