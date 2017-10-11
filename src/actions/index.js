@@ -1,5 +1,6 @@
-import axios from 'axios';
 import _ from 'lodash';
+import axios from 'axios';
+import Firebase from 'firebase';
 import { FETCH_PROFILES, FETCH_POSTS, DELETE_POST, CREATE_POST }from './types';
 
 //Thunk example
@@ -16,28 +17,23 @@ export function fetchUsers(){
 }
 
 //Firebase example
-const INITIAL_POSTS = {
-    123: 'One Weird Trick',
-    456: 'Bet you wanted to read this!'
-};
+const Posts = new Firebase('https://scorching-heat-8537.firebaseio.com/');
 
 export function fetchPosts() {
-    return {
-        type: FETCH_POSTS,
-        payload: INITIAL_POSTS
-    }
+    return dispatch => {
+        Posts.on('value', snapshot => {
+            dispatch({
+                type: FETCH_POSTS,
+                payload: snapshot.val()
+            });
+        });
+    };
 }
 
 export function createPost(post) {
-    return {
-        type: CREATE_POST,
-        payload: { [_.uniqueId()]: post }
-    }
+    return dispatch => Posts.push(post)    
 }
 
 export function deletePost(key) {
-    return {
-        type: DELETE_POST,
-        payload: key
-    }
+    return dispatch => Posts.child(key).remove();
 }
