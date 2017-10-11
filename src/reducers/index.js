@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
 import thunkReducer from './reducer_thunk';
-import firebaseReducer from './reducer_firebase';
+import firebaseReducer, { selectedPosts as selectedPostsReducer } from './reducer_firebase';
 
 const rootReducer = combineReducers({
   users: thunkReducer,
-  posts: firebaseReducer
+  posts: firebaseReducer,
+  selectedPostIds: selectedPostsReducer
 });
 
 export default rootReducer;

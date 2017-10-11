@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { FETCH_POSTS, DELETE_POST, CREATE_POST } from '../actions/types';
+import { FETCH_POSTS, DELETE_POST, CREATE_POST, SELECT_POST } from '../actions/types';
 
 export default function(state = {}, action){
     switch(action.type){
@@ -12,4 +12,13 @@ export default function(state = {}, action){
         default:
             return state;
     }    
+}
+
+export function selectedPosts(state = [], action){
+    switch(action.type){
+        case SELECT_POST:        
+            return [...state, action.payload];
+        default:
+            return state;
+    }
 }

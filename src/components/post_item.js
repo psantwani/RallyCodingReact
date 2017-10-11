@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { deletePost } from '../actions';
+import { deletePost, selectPost } from '../actions';
 
 class PostItem extends Component {  
 
@@ -8,9 +8,18 @@ class PostItem extends Component {
         this.props.deletePost(this.props.id);
     }
 
+    onPostSelect(){
+        this.props.selectPost(this.props.id);        
+    }
+
     render() {
         return (
         <li className="list-group-item post-item">
+            <input 
+                type="checkbox" 
+                style={{ marginRight: '10px' }} 
+                onClick={this.onPostSelect.bind(this)}
+            />
             {this.props.post}
             <button
             className="btn btn-danger right"
@@ -23,4 +32,4 @@ class PostItem extends Component {
     }
 }
 
-export default connect(null, { deletePost })(PostItem);
+export default connect(null, { deletePost, selectPost })(PostItem);

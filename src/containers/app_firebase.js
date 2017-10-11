@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchPosts, createPost, deletePost } from "../actions";
 import PostItem from '../components/post_item';
+import SelectedPosts from '../components/selected_posts_list';
 
 class App extends Component {
 
@@ -37,6 +38,9 @@ class App extends Component {
   render() {
     return (
       <div>
+        <h4 style={{marginTop : '10px'}}>Selected Posts</h4>
+        <SelectedPosts />
+        <hr />
         <h4 style={{marginTop : '10px'}}>Create a Post</h4>
         <form          
           className="form-inline create-post-form"
@@ -62,8 +66,8 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ posts }){
-  return { posts };
+function mapStateToProps({ posts, selectedPostIds }){
+  return { posts, selectedPostIds };
 }
 
 export default connect(mapStateToProps, { fetchPosts, createPost, deletePost })(App);
